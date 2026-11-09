@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPERION-X Web</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        canvas.emscripten {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+    
+    <script type="text/javascript">
+        var Module = {
+            preRun: [],
+            postRun: [],
+            print: (function() {
+                return function(text) {
+                    console.log(text);
+                };
+            })(),
+            printErr: function(text) {
+                console.error(text);
+            },
+            canvas: (function() {
+                var canvas = document.getElementById('canvas');
+                canvas.addEventListener("webglcontextlost", function(e) {
+                    alert('WebGL context lost. Please reload the page.');
+                    e.preventDefault();
+                }, false);
+                return canvas;
+            })()
+        };
+    </script>
+    <script async type="text/javascript" src="hyperion_x.js"></script>
+</body>
+</html>
+<html>
+
+</html>
